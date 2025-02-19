@@ -1,0 +1,120 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+
+/* Custom Styles */
+body {
+  background-color: #f8f9fa; /* Light gray background */
+  font-family: 'Poppins', sans-serif; /* Custom font */
+}
+
+.custom-container {
+  max-width: 900px; /* Limit width */
+  margin: auto;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #007bff; /* Bootstrap primary color */
+}
+
+.custom-btn {
+  background-color: #28a745; /* Green button */
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.custom-btn:hover {
+  background-color: #218838;
+}
+
+.table-responsive {
+  max-height: 50vh; /* Adjust to your needs */
+  overflow-y: auto;
+}
+
+.custom-hr {
+  border: 0;  /* Removes default border */
+  height: 2px;  /* Sets the thickness */
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Gradient background */
+  width: 50%;  /* Adjusts the width */
+  margin: 20px auto;  /* Adds space around the line */
+  border-radius: 5px; /* Optional: gives rounded corners */
+}
+
+.digg_pagination {
+  background: white;
+  cursor: default;
+  /* self-clearing method: */ }
+  .digg_pagination a, .digg_pagination span, .digg_pagination em {
+    padding: 0.2em 0.5em;
+    display: block;
+    float: left;
+    margin-right: 1px; }
+  .digg_pagination .disabled {
+    color: #999999;
+    border: 1px solid #dddddd; }
+  .digg_pagination .current {
+    font-style: normal;
+    font-weight: bold;
+    background: #ff6f69;
+    color: white;
+    border: 1px solid #ff6f69; }
+  .digg_pagination a {
+    text-decoration: none;
+    color: #ff6f69;
+    border: 1px solid #d6d4e0; }
+    .digg_pagination a:hover, .digg_pagination a:focus {
+      color: #000033;
+      border-color: #000033; }
+  .digg_pagination .page_info {
+    background: #ff6f69;
+    color: white;
+    padding: 0.4em 0.6em;
+    width: 22em;
+    margin-bottom: 0.3em;
+    text-align: center; }
+    .digg_pagination .page_info b {
+      color: #000033;
+      background: #6aa6ed;
+      padding: 0.1em 0.25em; }
+  .digg_pagination:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden; }
+  * html .digg_pagination {
+    height: 1%; }
+  *:first-child + html .digg_pagination {
+    overflow: hidden; }
+.prose :where(h1):not(:where([class~=not-prose] *)) {
+    color: var(--tw-prose-headings);
+    font-weight: 800;
+    font-size: 30px;
+    margin-top: 0;
+    line-height: 1.1111111
+}
+
+
+#items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#items-table th, #items-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+#pagination-controls {
+  margin-top: 20px;
+}
+
+#pagination-controls button {
+  padding: 5px 10px;
+}

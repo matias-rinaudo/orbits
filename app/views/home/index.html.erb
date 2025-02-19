@@ -1,0 +1,99 @@
+<div class="container">
+  	<div class="row">
+	    <div class="col-md-12">
+			<div class="card p-4 mb-4 mx-auto">
+				<h2>Buscar musica en RapidApi</h2>
+				<br>
+				<div class="d-flex justify-content-center align-items-center">
+					<input class="form-control" placeholder="ejemplo: Eminem" type="text" id="keyword-rapid-api">
+					<div style="margin-right: 10px;"></div>
+					<button class="btn btn-primary" id="search-rapid-api">Buscar</button>
+				</div>
+				<hr class="custom-hr"/>
+				<div>
+					<table class="table" id="table-results-rapid-api">
+						<thead>
+							<tr>
+								<th scope="col">Titulo</th>
+								<th scope="col">Autor</th>
+								<th scope="col">Album</th>
+								<th scope="col">Duración</th>
+								<th scope="col">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+					<div id="pagination-controls">
+						<button id="prev-page" disabled>Anterior</button>
+						<span id="page-number"></span>
+						<button id="next-page" disabled>Siguiente</button>
+					</div>
+				</div>
+			</div>
+	    </div>
+  	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		let currentPage = 1;
+  		let totalPages = 1;
+		$('#search-rapid-api').click(function(){
+            keyword = $('#keyword-rapid-api').val();
+            loadMusics(currentPage);
+		});
+		$('#prev-page').on('click', function() {
+		    if (currentPage > 1) {
+		      loadMusics(currentPage - 1);
+		    }
+		});
+		$('#next-page').on('click', function() {
+		    if (currentPage < totalPages) {
+		      loadMusics(currentPage + 1);
+		    }
+		});
+		function loadMusics(page){
+			$.ajax({
+                url: '/musics/search_in_rapid_api',
+                dataType: 'json',
+                delay: 300,
+                data: { keyword: keyword, page: page },
+                success: function (data) {
+                	$('#table-results-rapid-api tbody').empty();
+                    data.items.forEach((music) => {
+                    	const musicTr = `
+                            <tr>
+                                <td>${music.title}</td>
+                                <td>${music.author}</td>
+                                <td>${music.album}</td>
+                                <td>${music.duration}</td>
+                                <td>
+									<form action="/musics" method="post">
+										<input type="hidden" name="music[title]" value="${music.title}">
+										<input type="hidden" name="music[author]" value="${music.author}">
+										<input type="hidden" name="music[album]" value="${music.album}">
+										<input type="hidden" name="music[duration]" value="${music.duration}">
+										<input type="hidden" name="music[reference_api]" value="${music.id}">
+										<input type="submit" value="Guardar" class="btn btn-success">
+									</form>
+                                </td>
+                            </tr>
+                        `;
+                        $('#table-results-rapid-api tbody').append(musicTr);
+                    });
+			        currentPage = data.current_page;
+			        totalPages = data.total_pages;
+			        updatePaginationControls();
+                },
+                error: function () {
+                    console.error('Failed to load musics.');
+                }
+            });
+		}
+		function updatePaginationControls() {
+		    $('#prev-page').prop('disabled', currentPage <= 1);
+		    $('#next-page').prop('disabled', currentPage >= totalPages);
+		    $('#page-number').text(`Pagina ${currentPage} de ${totalPages}`);
+		}
+	})
+</script>

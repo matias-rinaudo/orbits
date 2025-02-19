@@ -1,0 +1,40 @@
+<%= simple_form_for @music do |form| %>
+    <% if @music.errors.any? %>
+        <div class="alert alert-danger" id="error_explanation">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="alert-heading"><%= pluralize(@music.errors.count, "error", plural: "errores") %>:</h4>
+            <ul class="mb0">
+                <% @music.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="col-md-6">
+            <%= form.input :title, class: 'form-control' %>    
+        </div>
+        <div class="col-md-6">
+            <%= form.input :album, class: 'form-control' %>    
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <%= form.input :duration, class: 'form-control' %>    
+        </div>
+        <div class="col-md-6">
+            <%= form.input :author, class: 'form-control' %>    
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-1">
+            <%= form.button :submit, 'Guardar', class: 'btn btn-success' %>
+        </div>
+        <div class="col-md-3">
+            <%= link_to 'Volver al listado', musics_path, class: 'btn btn-info' %>              
+        </div>
+    </div>
+<% end %>
